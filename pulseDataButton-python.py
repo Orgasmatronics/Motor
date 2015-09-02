@@ -7,40 +7,9 @@ Created on Wed Sep 02 15:37:01 2015
 
 plot and fit data from pulse drive of a motor
 
-load PulseDataButton onto arduino, code follows:
+load PulseDataButton onto arduino, code at bottom of file
 
-int pulseLength = 25;//ms
-boolean buttonState = false;
-int numPoints = 500; //number of points
-int deltaT = 1;
-int x0 = 0;
-void setup(){
-    Serial.begin(115200);
-    x0 = analogRead(A5);
-}
-void loop(){
-  
-  buttonState = digitalRead(2);
-  if(buttonState){
-    analogWrite(5,255);
-    delay(pulseLength);
-    analogWrite(5,0);
-    delay(35);
-    int index = 0;
-    int x[numPoints];
-    for(index = 0;index < numPoints;index++){
-      x[index] = analogRead(A5)  - x0;
-      delay(deltaT);
-    }
-    for(index = 0;index < numPoints;index++){
-      Serial.print(x[index]);
-      Serial.print("  ");
-    }
-    Serial.println();
-    delay(500);
-    }
-    
-}
+Aleister Crowley liscense: do what thou wilt shall be the whole of the law
 
 
 """
@@ -87,3 +56,37 @@ def stringToArray(string):
 def ringDown(t,lifetime,phase,amplitude,frequency):
     return amplitude*exp(-t/lifetime)*sin(2*pi*frequency*t*0.001 + phase)
 
+"""
+int pulseLength = 25;//ms
+boolean buttonState = false;
+int numPoints = 500; //number of points
+int deltaT = 1;
+int x0 = 0;
+void setup(){
+    Serial.begin(115200);
+    x0 = analogRead(A5);
+}
+void loop(){
+  
+  buttonState = digitalRead(2);
+  if(buttonState){
+    analogWrite(5,255);
+    delay(pulseLength);
+    analogWrite(5,0);
+    delay(35);
+    int index = 0;
+    int x[numPoints];
+    for(index = 0;index < numPoints;index++){
+      x[index] = analogRead(A5)  - x0;
+      delay(deltaT);
+    }
+    for(index = 0;index < numPoints;index++){
+      Serial.print(x[index]);
+      Serial.print("  ");
+    }
+    Serial.println();
+    delay(500);
+    }
+    
+}
+"""
