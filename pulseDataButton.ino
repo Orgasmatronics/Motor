@@ -31,7 +31,7 @@ void loop(){
       delay(deltaT);
     }
     for(index = 0;index < numPoints;index++){
-      Serial.print(x[0]);
+      Serial.print(x[index]);
       Serial.print("  ");
     }
     Serial.println();
