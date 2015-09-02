@@ -3,7 +3,7 @@ simple program to get time domain response to a pulse
 
 
 Aleister Crowley liscense: do what thou wilt shall be the whole of the law
-/*
+*/
 
 int pulseLength = 25;//ms
 boolean buttonState = false;
