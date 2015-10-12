@@ -1,0 +1,98 @@
+/*
+Crowley license: do what thou wilt shall be the whole of the law
+fuck patents, fuck copyright
+
+October 2015
+*/
+
+float flow = 9.0; //Minimum frequency [Hz]
+float fhigh = 20.0; //Maximum frequency [Hz]
+float f = flow;  //current frequency [Hz]
+int T = int(1000.0/f);  //period in ms
+int pulseLength = 10;
+int T2 = T - pulseLength;
+int tstart = 0;
+int tnow = 0;
+float knob = 0.0;
+
+int mode = 0;
+int x = 0;
+int x0 = 0;
+int threshold = 0;
+int sensorPin = A4;    // select the input pin for the potentiometer
+int motorPin = 10;
+int xold = 0;
+int index  = 0;
+boolean button3state = false;
+boolean button2state = false;
+
+void setup() {
+  Serial.begin(115200);
+  x0 = analogRead(sensorPin);   
+  tstart = millis();
+  tnow = tstart;
+}
+
+void loop() {
+  
+  button3state = digitalRead(3);
+  if(button3state){
+    mode = mode + 1;
+    if(mode > 2){
+      mode = 0;
+    }
+    delay(200);
+  }
+  
+  switch (mode){
+    case 0:
+      //push button turns on motor take data
+      button2state = digitalRead(2);
+      if(button2state){
+        analogWrite(motorPin,255);
+      }
+      else{
+        analogWrite(motorPin,0);
+      }
+      x = analogRead(sensorPin) - x0;
+      Serial.print(x);
+      Serial.print(',');
+      delay(1);
+      break;
+    case 1:
+      //dumb pulse drive
+      knob = float(analogRead(A2))/1023.0;//analog input is scaled to 1023 maximum, "knob" is scaled to 1.0
+      f = flow + knob*(fhigh - flow);
+      T = int(1000.0/f);
+      x = analogRead(sensorPin) - x0;
+      Serial.print(x);
+      Serial.print(',');
+      tnow = millis();
+      if(tnow - tstart >= T){
+        tstart = millis();
+        analogWrite(10,255);
+      }
+      if(tnow - tstart >= pulseLength && tnow - tstart < T){
+        analogWrite(10,0);
+      }      
+      delay(1);
+      break;
+    case 2:
+      //smart pulse drive
+      x = analogRead(A4) - x0;
+      if(x >= threshold){
+       analogWrite(10,255);
+      }
+      else{
+        analogWrite(10,0);
+      }
+      Serial.print(x);
+      Serial.print(',');
+      delay(1);    
+      break;
+    default:
+      mode = 0;
+  }    
+  
+  
+}
