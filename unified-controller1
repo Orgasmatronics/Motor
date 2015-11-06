@@ -23,8 +23,6 @@ boolean button2state = false;
 void setup() {
   Serial.begin(115200);
   x0 = analogRead(sensorPin);   
-  tstart = millis();
-  tnow = tstart;
 }
 
 void loop() {
