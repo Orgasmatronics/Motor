@@ -2,18 +2,12 @@
 Crowley license: do what thou wilt shall be the whole of the law
 fuck patents, fuck copyright
 
-October 2015
+November 2015
+
+This program is for two mode motor driver: button pulse and smart feedback drive
+
 */
 
-float flow = 9.0; //Minimum frequency [Hz]
-float fhigh = 20.0; //Maximum frequency [Hz]
-float f = flow;  //current frequency [Hz]
-int T = int(1000.0/f);  //period in ms
-int pulseLength = 10;
-int T2 = T - pulseLength;
-int tstart = 0;
-int tnow = 0;
-float knob = 0.0;
 
 int mode = 0;
 int x = 0;
@@ -38,10 +32,10 @@ void loop() {
   button3state = digitalRead(3);
   if(button3state){
     mode = mode + 1;
-    if(mode > 2){
+    if(mode > 1){
       mode = 0;
     }
-    delay(200);
+    delay(200); 
   }
   
   switch (mode){
@@ -55,29 +49,10 @@ void loop() {
         analogWrite(motorPin,0);
       }
       x = analogRead(sensorPin) - x0;
-      Serial.print(x);
-      Serial.print(',');
+      Serial.println(x);
       delay(1);
       break;
     case 1:
-      //dumb pulse drive
-      knob = float(analogRead(A2))/1023.0;//analog input is scaled to 1023 maximum, "knob" is scaled to 1.0
-      f = flow + knob*(fhigh - flow);
-      T = int(1000.0/f);
-      x = analogRead(sensorPin) - x0;
-      Serial.print(x);
-      Serial.print(',');
-      tnow = millis();
-      if(tnow - tstart >= T){
-        tstart = millis();
-        analogWrite(10,255);
-      }
-      if(tnow - tstart >= pulseLength && tnow - tstart < T){
-        analogWrite(10,0);
-      }      
-      delay(1);
-      break;
-    case 2:
       //smart pulse drive
       x = analogRead(A4) - x0;
       if(x >= threshold){
@@ -86,8 +61,7 @@ void loop() {
       else{
         analogWrite(10,0);
       }
-      Serial.print(x);
-      Serial.print(',');
+      Serial.println(x);
       delay(1);    
       break;
     default:
