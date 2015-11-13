@@ -22,5 +22,8 @@ void loop() {
   if(dataState != 0){
     analogWrite(10,255);
   }
+  else{
+    analogWrite(10,0);
+  }
   
 }
