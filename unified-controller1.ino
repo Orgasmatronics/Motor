@@ -19,10 +19,13 @@ int xold = 0;
 int index  = 0;
 boolean button3state = false;
 boolean button2state = false;
+int dataPin = 11;
+
 
 void setup() {
   Serial.begin(115200);
   x0 = analogRead(sensorPin);   
+  pinMode(dataPin, OUTPUT);
 }
 
 void loop() {
@@ -42,9 +45,12 @@ void loop() {
       button2state = digitalRead(2);
       if(button2state){
         analogWrite(motorPin,255);
+        digitalWrite(dataPin,HIGH);
+
       }
       else{
         analogWrite(motorPin,0);
+        digitalWrite(dataPin,LOW);
       }
       x = analogRead(sensorPin) - x0;
       Serial.println(x);
@@ -55,9 +61,11 @@ void loop() {
       x = analogRead(A4) - x0;
       if(x >= threshold){
        analogWrite(10,255);
+       digitalWrite(dataPin,LOW);
       }
       else{
         analogWrite(10,0);
+        digitalWrite(dataPin,HIGH);
       }
       Serial.println(x);
       delay(1);    
