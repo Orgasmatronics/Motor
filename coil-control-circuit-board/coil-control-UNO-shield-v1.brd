@@ -152,10 +152,10 @@
 </layers>
 <board>
 <plain>
-<wire x1="0" y1="11.43" x2="54.61" y2="11.43" width="0" layer="20"/>
-<wire x1="54.61" y1="11.43" x2="54.61" y2="71.12" width="0" layer="20"/>
-<wire x1="54.61" y1="71.12" x2="0" y2="71.12" width="0" layer="20"/>
-<wire x1="0" y1="71.12" x2="0" y2="11.43" width="0" layer="20"/>
+<wire x1="0.508" y1="11.684" x2="54.61" y2="11.684" width="0" layer="20"/>
+<wire x1="54.61" y1="11.684" x2="54.61" y2="71.12" width="0" layer="20"/>
+<wire x1="54.61" y1="71.12" x2="0.508" y2="71.12" width="0" layer="20"/>
+<wire x1="0.508" y1="71.12" x2="0.508" y2="11.684" width="0" layer="20"/>
 <text x="54.229" y="59.817" size="1.27" layer="21" rot="SR90">PATENTS 
 STIFLE 
 INNOVATION</text>
