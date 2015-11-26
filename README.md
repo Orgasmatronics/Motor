@@ -5,8 +5,9 @@ This is a modular system for manufacturing motors scalably from the waste stream
 The system consists of:
 
 1. a control board
-2. drive coils
-3. pickup coils
+2. drive and pickup coils
+3. energy storage
+4. mechanical-to-electrical energy conversion circuits
 4. modular mechanical framing system
 5. mechanical oscillators(mass + spring)
 6. bearings, shafts and drive trains
