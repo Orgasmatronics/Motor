@@ -1,3 +1,18 @@
-# Motor
-"The Motor", a system for linear drive resonant motors
-It is assumed that a coil may be driven by pin 5, a knob is on pin A2, any voltage sensing signal goes to A5, and a button is on digital pin 2.
+### Motor
+
+This is a modular system for manufacturing motors scalably from the waste streams of consumer capitalism.   
+
+The system consists of:
+
+1. a control board
+2. drive coils
+3. pickup coils
+4. modular mechanical framing system
+5. mechanical oscillators(mass + spring)
+6. bearings, shafts and drive trains
+7. IoT interface
+
+
+Taken together, the components of this system should be usable to construct machines that can automate the manufacture of more components of the system, creating the ability to self-propagate.  
+
+As of now(November 2015) there are several parts that have to be either bought or made with commercial tools like the 3d printer.  A ongoing goal of this project is to replace all those components so that the whole project can be re-created from scratch using waste streams _only_.
